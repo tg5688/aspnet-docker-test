@@ -24,7 +24,7 @@
             <td>@(Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER") is object ? "true" : "false")</td>
         </tr>
         <tr>
-            <td>CPU</td>
+            <td>CPU Number of cores</td>
             <td>@Environment.ProcessorCount</td>
         </tr>
     @if (RuntimeInformation.OSDescription.StartsWith("Linux") && Directory.Exists("/sys/fs/cgroup/memory"))
