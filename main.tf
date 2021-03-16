@@ -4,14 +4,18 @@ provider "azurerm" {
 }
 
 terraform {
-    backend "azurerm" {
-        resource_group_name  = "tf_rg_blob"
-        storage_account_name = "tfstorageaccounttg5688"
-        container_name       = "tfstate"
-        key                  = "terraform.tfstate"
-    }
+  backend "azurerm" {
+    resource_group_name  = "tf_rg_blob"
+    storage_account_name = "tfstorageaccounttg5688"
+    container_name       = "tfstate"
+    key                  = "terraform.tfstate"
+  }
 }
 
+variable "imagebuild" {
+  type        = string
+  description = "Latest Image Build"
+}
 
 resource "azurerm_resource_group" "tf_test" {
   name     = "tfmainrg"
@@ -29,7 +33,7 @@ resource "azurerm_container_group" "tfcg_test" {
 
   container {
     name   = "aspnetapp-docker"
-    image  = "tg5688/aspnetapp"
+    image  = "tg5688/aspnetapp:${var.imagebuild}"
     cpu    = "1"
     memory = "1"
 
